@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+      <form action='' method="post">
+        {% csrf_token %}
+        <input type="text" name="txtnum1" placeholder="Enter First Number"  />
+        <br><br>
+        <input type="text" name="txtnum2" placeholder="Enter Second Number"  />
+        <br><br>
+        <input type="submit" name="btnsubmit" value="Addition" />
+      </form>
+      {{key}}
+</body>
+</html>

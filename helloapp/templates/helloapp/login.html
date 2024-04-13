@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Login Form</h1>
+    <a href="/helloapp/reg">new user register here</a>
+    <form method="post">
+        {% csrf_token %}
+        <p><input type="text" placeholder="Enter username" name="txtemail" /></p>
+        <p><input type="password" placeholder="Enter password" name="txtpass" /></p>
+       
+        
+        <p><input type="submit" value="Login" name="btnInsert" /></p>
+    </form>
+    {{key}}
+</body>
+</html>
