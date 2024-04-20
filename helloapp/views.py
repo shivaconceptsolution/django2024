@@ -1,6 +1,9 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from . models import Register
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
+from django.contrib.auth import logout,login
 def index(request):
     return HttpResponse('Hello World')
 def addition(request):
@@ -13,28 +16,50 @@ def addition(request):
 
 def reg(request):
     if request.method=='POST':
-        obj = Register(username=request.POST['txtuser'],emailid=request.POST['txtemail'],password=request.POST['txtpass'],mobile=request.POST['txtmobile'],fullname=request.POST['txtfname'])
-        obj.save()
+        #obj = Register(username=request.POST['txtuser'],emailid=request.POST['txtemail'],password=request.POST['txtpass'],mobile=request.POST['txtmobile'],fullname=request.POST['txtfname'])
+        #obj.save()
+        user = User.objects.create_user(request.POST['txtuser'],request.POST['txtemail'],request.POST['txtpass'])
+        user.first_name=request.POST['txtfirst']
+        user.last_name=request.POST['txtlast']
+        user.save()
         return render(request,"helloapp/reg.html",{"key":"data inserted successfully"})
     else:
         return render(request,"helloapp/reg.html")
 def viewreg(request):
-    if(request.session.has_key('uid')):
+    if request.user.is_authenticated:
       obj = Register.objects.all()
       return render(request,"helloapp/viewreg.html",{"key":obj})
     else:
-        return redirect('/helloapp/login')
+        return redirect('/helloapp/loginuser')
 
-def login(request):
+def loginuser(request):
     if request.method=='POST':
-        obj = Register.objects.filter(emailid=request.POST['txtemail'],password=request.POST['txtpass'])
-        if obj.count()>0:
-            request.session['uid']=request.POST['txtemail']
+        obj = authenticate(username=request.POST['txtemail'],password=request.POST['txtpass'])
+        if obj is not None:
+            login(request,obj)
+            #request.session['uid']=request.POST['txtemail']
             return redirect('/helloapp/viewreg')
         else:
             return render(request,"helloapp/login.html",{"key":"invalid emailid and password"})
     else:
         return render(request,"helloapp/login.html")
-def logout(request):
-    del request.session['uid']
-    return redirect('/helloapp/login')
+def logoutuser(request):
+    #del request.session['uid']
+    logout(request)
+    return redirect('/helloapp/loginuser')
+
+def setcookie(request):
+    response = HttpResponse("Cookie Set")
+    response.set_cookie('ckey', 'hello')
+    return response
+
+def getcookie(request):
+    a  = request.COOKIES['ckey']
+    return HttpResponse("value is "+  a)
+
+def ajaxload(request):
+    return render(request,"helloapp/search.html")
+def ajaxcode(request):
+    data = request.GET["q"]
+    result=Register.objects.filter(fullname__startswith=data)
+    return render(request,"helloapp/searchresult.html",{"key":result})

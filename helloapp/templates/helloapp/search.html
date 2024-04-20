@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function searchdata(a)
+        {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange=function()
+            {
+                 if(xmlhttp.status==200 && xmlhttp.readyState==4)
+                 {
+                    if(a.length!=0){
+                   document.getElementById("res").innerHTML=xmlhttp.responseText;
+                    }
+                    else
+                    {
+                        document.getElementById("res").innerHTML=' ';
+                    }
+                 }
+            }
+            xmlhttp.open("GET","/helloapp/ajaxcode?q="+a,true);
+            xmlhttp.send();
+
+        }
+    </script>
+</head>
+<body>
+    <input type="text" id="search" placeholder="Enter content to search" onkeyup="searchdata(this.value)" />
+    <br>
+    <div id="res"></div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% if key %}
+    <table border="1">
+        <tr><th>Username</th><th>Email</th><th>Fullname</th></tr>
+        {% for q in key %}
+            <tr>  <td>{{ q.username }} </td><td> {{ q.emailid }} </td><td> {{ q.fullname }}</td></tr>
+        {% endfor %}
+       
+       </table>
+       {% else %}
+       <p>No matching record</p>
+
+       {% endif %}
+       
+</body>
+</html>

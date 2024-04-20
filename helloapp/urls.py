@@ -4,7 +4,13 @@ urlpatterns = [
 path('', views.index, name='index'),
 path('ram', views.addition, name='addition'),
 path('reg', views.reg, name='reg'),
-path('login', views.login, name='login'),
-path('logout', views.logout, name='logout'),
-path('viewreg', views.viewreg, name='viewreg')
+path('loginuser', views.loginuser, name='loginuser'),
+path('logoutuser', views.logoutuser, name='logoutuser'),
+path('getcookie', views.getcookie, name='getcookie'),
+path('setcookie', views.setcookie, name='setcookie'),
+path('viewreg', views.viewreg, name='viewreg'),
+path('ajaxload',views.ajaxload,name='ajaxload'),
+path('ajaxcode',views.ajaxcode,name='ajaxcode')
+
+
 ]
