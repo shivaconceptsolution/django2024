@@ -10,7 +10,7 @@ path('getcookie', views.getcookie, name='getcookie'),
 path('setcookie', views.setcookie, name='setcookie'),
 path('viewreg', views.viewreg, name='viewreg'),
 path('ajaxload',views.ajaxload,name='ajaxload'),
-path('ajaxcode',views.ajaxcode,name='ajaxcode')
-
+path('ajaxcode',views.ajaxcode,name='ajaxcode'),
+path('ajaxcode1',views.ajaxcode1,name='ajaxcode1')
 
 ]

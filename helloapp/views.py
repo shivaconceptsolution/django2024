@@ -63,3 +63,7 @@ def ajaxcode(request):
     data = request.GET["q"]
     result=Register.objects.filter(fullname__startswith=data)
     return render(request,"helloapp/searchresult.html",{"key":result})
+def ajaxcode1(request):
+    data = request.GET["q"]
+    result=Register.objects.filter(fullname=data)
+    return render(request,"helloapp/searchresult1.html",{"key":result})

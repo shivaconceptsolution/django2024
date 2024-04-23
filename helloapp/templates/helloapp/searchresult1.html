@@ -7,10 +7,10 @@
 </head>
 <body>
     {% if key %}
-    <table>
+    <table border="1">
       
         {% for q in key %}
-            <tr>  <td onclick="displaydata(this)"> {{ q.fullname }}</td></tr>
+            <tr><td> {{ q.id }}</td><td> {{ q.username }}</td>  <td> {{ q.fullname }}</td><td> {{ q.emailid }}</td> </tr>
         {% endfor %}
        
        </table>

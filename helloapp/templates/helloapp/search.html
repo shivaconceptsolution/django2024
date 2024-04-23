@@ -25,6 +25,28 @@
             xmlhttp.send();
 
         }
+        function displaydata(a)
+        {
+         //   alert(a.innerText);
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange=function()
+            {
+                 if(xmlhttp.status==200 && xmlhttp.readyState==4)
+                 {
+                    if(a.length!=0){
+                   document.getElementById("res").innerHTML=xmlhttp.responseText;
+                    }
+                    else
+                    {
+                        document.getElementById("res").innerHTML=' ';
+                    }
+                 }
+            }
+            xmlhttp.open("GET","/helloapp/ajaxcode1?q="+a.innerText,true);
+            xmlhttp.send();
+
+        }
+        
     </script>
 </head>
 <body>
