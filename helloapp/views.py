@@ -1,9 +1,11 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from . models import Register
+from . models import Register,Fupload
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import logout,login
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
 def index(request):
     return HttpResponse('Hello World')
 def addition(request):
@@ -67,3 +69,16 @@ def ajaxcode1(request):
     data = request.GET["q"]
     result=Register.objects.filter(fullname=data)
     return render(request,"helloapp/searchresult1.html",{"key":result})
+def uploadfile(request):
+	if request.method == 'POST':
+		myfile = request.FILES['myfile']
+		fs = FileSystemStorage()
+		filename = fs.save(myfile.name, myfile)
+		data= Fupload(filepath=filename)
+		data.save()
+		res = fs.url(filename)
+		return render(request, 'helloapp/fileupload.html',{'key':res})
+	return render(request, 'helloapp/fileupload.html')
+def viewfile(request):
+	s = Fupload.objects.all()
+	return render(request,"helloapp/viewfile.html",{'res':s})
